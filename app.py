@@ -59,7 +59,7 @@ def logits_to_text(logits, tokenizer = french_tokenizer):
     """
     index_to_words = y_id_to_word
 
-    return ' '.join([index_to_words[prediction] for prediction in np.argmax(logits, 1)])
+    return ' '.join([index_to_words[np.argmax(x)] for x in logits])
 
 
 @app.route("/predict")
