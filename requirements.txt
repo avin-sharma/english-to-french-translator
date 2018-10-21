@@ -1,0 +1,7 @@
+# requirements.txt
+Flask
+Flask-Compress
+keras
+numpy
+tensorflow==1.10
+h5py
