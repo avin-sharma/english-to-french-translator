@@ -68,6 +68,7 @@ def predict():
     sentence = flask.request.args.get('sentence')
     print(sentence)
     sentence = prepare_text(sentence)
+    print(sentence)
     sentence = model.predict(sentence,1)
     sentence = logits_to_text(sentence)
     data["success"] = True
@@ -75,12 +76,6 @@ def predict():
     # return the data dictionary as a JSON response
     return flask.jsonify(data)
     
-
-# if this is the main thread of execution first load the model and
-# then start the server
-if __name__ == "__main__":
-    print(("* Loading Keras model and Flask starting server..."
+print(("* Loading Keras model and Flask starting server..."
         "please wait until server has fully started"))
-    load_translation_model()
-    app.run()
-
+load_translation_model()
