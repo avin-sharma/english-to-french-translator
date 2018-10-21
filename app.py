@@ -68,9 +68,13 @@ def predict():
     sentence = flask.request.args.get('sentence')
     print(sentence)
     sentence = prepare_text(sentence)
+    sentence = model.predict(sentence)
     print(sentence)
-    sentence = model.predict(sentence,1)
-    sentence = logits_to_text(sentence)
+    print(np.argmax(sentence[0]))
+    print(y_id_to_word)
+    # sentence = logits_to_text(sentence)
+    sentence = ' '.join([y_id_to_word[np.argmax(x)] for x in sentence[0]])
+    print(sentence)
     data["success"] = True
     data["prediction"] = sentence
     # return the data dictionary as a JSON response
@@ -79,3 +83,9 @@ def predict():
 print(("* Loading Keras model and Flask starting server..."
         "please wait until server has fully started"))
 load_translation_model()
+
+
+@app.route('/', methods=['GET'])
+def home():
+    vocab = ' '.join([key for key, value in english_tokenizer.word_index.items()])
+    return "<h1>Vocabulary</h1>" + vocab
