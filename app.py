@@ -43,8 +43,8 @@ def load_translation_model():
 def prepare_text(sentence):
     sentence = [english_tokenizer.word_index[word] for word in sentence.split()]
     sentence = pad_sequences([sentence], maxlen=15, padding='post')
-    sentence = np.array(sentence)
-    return sentence
+    sentences = np.array([sentence[0], sentence[0]])
+    return sentences
 
 
 # ## Converting numbers back to words
