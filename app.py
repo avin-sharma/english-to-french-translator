@@ -66,15 +66,11 @@ def logits_to_text(logits, tokenizer = french_tokenizer):
 def predict():
     data = {"success": False}
     sentence = flask.request.args.get('sentence')
-    print(sentence)
     sentence = prepare_text(sentence)
     sentence = model.predict(sentence)
-    print(sentence)
-    print(np.argmax(sentence[0]))
-    print(y_id_to_word)
     # sentence = logits_to_text(sentence)
     sentence = ' '.join([y_id_to_word[np.argmax(x)] for x in sentence[0]])
-    print(sentence)
+    sentence =sentence.replace(' <PAD>', '')
     data["success"] = True
     data["prediction"] = sentence
     # return the data dictionary as a JSON response
